@@ -13,11 +13,18 @@ from load_repo import (
 )
 from rep import (
     create_path_to_load_files,
+    get_hash,
     save_file,
-    get_hash
 )
 
 URL_REPOSITORY = 'https://gitea.radium.group/radium/project-configuration'
+
+
+def get_hash_string(string):
+    """Получить хеш строки."""
+    hsh = hashlib.sha256()
+    hsh.update(str.encode(string))
+    return hsh.hexdigest()
 
 
 class TestLoad(unittest.IsolatedAsyncioTestCase):
@@ -42,12 +49,6 @@ class TestLoad(unittest.IsolatedAsyncioTestCase):
         }
         self.assertEqual(list_load_files, list_files)
 
-    def get_hash(self, string):
-        """Получить хеш строки."""
-        hsh = hashlib.sha256()
-        hsh.update(str.encode(string))
-        return hsh.hexdigest()
-
     def test_get_hash_files(self):
         """
         Тестирование функции get_hash_files.
@@ -66,7 +67,7 @@ class TestLoad(unittest.IsolatedAsyncioTestCase):
         for temporary_path in list_files:
             text_file = 'SOme Test Text {path}'.format(path=temporary_path)
             (self.temporary_dir / temporary_path).write_text(text_file)
-            hashes_files[str(temporary_path)] = self.get_hash(text_file)
+            hashes_files[str(temporary_path)] = get_hash_string(text_file)
 
         creating_hash = get_hash_files(self.temporary_dir, list_files)
         self.assertEqual(creating_hash, hashes_files)
@@ -118,6 +119,14 @@ class TestRep(unittest.TestCase):
 
     def test_get_hash(self):
         """Тестирование функции get_hash."""
+        path = Path('test_file')
+        hash_file = get_hash(self.temporary_dir, path)
+        self.assertIsNone(hash_file)
+
+        test_text = 'Тестовый поток битов'
+        (self.temporary_dir / path).write_bytes(str.encode(test_text))
+        hash_file = get_hash(self.temporary_dir, path)
+        self.assertEqual(hash_file, get_hash_string(test_text))
 
     def tearDown(self):
         """Настройка после выполнения теста."""
