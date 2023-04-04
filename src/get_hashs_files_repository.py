@@ -5,7 +5,12 @@ import logging
 import aiohttp
 
 from config import LIST_FILE_REPO, RAW_FILE
-from rep import build_dirs, create_path_to_load_files, get_hash, save_file
+from file_manager import (
+    build_dirs,
+    create_path_to_load_files,
+    get_hash,
+    save_file,
+)
 from run_queue import run_queue
 
 
@@ -122,8 +127,8 @@ def get_hash_files(path_to_load, list_load_file):
 
 
 if __name__ == '__main__':
-    url_repo = 'https://gitea.radium.group/radium/project-configuration'
-    path_to_load = 'temp4'
-    list_load_files = asyncio.run(load_repo(url_repo, path_to_load))
+    url_repository = 'https://gitea.radium.group/radium/project-configuration'
+    path_to_load = 'dir_for_load_file_from_repository'
+    list_load_files = asyncio.run(load_repo(url_repository, path_to_load))
     logging.basicConfig(level=logging.INFO)
     logging.info(get_hash_files(path_to_load, list_load_files))

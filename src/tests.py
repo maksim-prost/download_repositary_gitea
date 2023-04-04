@@ -5,16 +5,12 @@ import unittest
 from pathlib import Path
 
 from config import LIST_FILE_REPO
-from load_repo import (
+from file_manager import create_path_to_load_files, get_hash, save_file
+from get_hashs_files_repository import (
     ExceptionLoadError,
     get_hash_files,
     get_request,
     load_repo,
-)
-from rep import (
-    create_path_to_load_files,
-    get_hash,
-    save_file,
 )
 
 URL_REPOSITORY = 'https://gitea.radium.group/radium/project-configuration'
