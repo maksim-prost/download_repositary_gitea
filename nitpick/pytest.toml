@@ -1,0 +1,15 @@
+["pyproject.toml".tool.poetry.group.dev.dependencies]
+pytest = "^7.2.0"
+pytest-cov = "^4.0.0"
+pytest-xdist = {extras = ["psutil"], version = "^3.0.2"}
+pytest-sugar = "^0.9.5"
+Faker = "^15.1.0"
+pytest-snapshot = "^0.9.0"
+
+["pyproject.toml".tool.pytest.ini_options]
+testpaths = [
+  "tests",
+]
+python_files = "test*.py"
+addopts = "-rsxX -l --tb=short --strict-markers --doctest-modules"
+xfail_strict = "true"

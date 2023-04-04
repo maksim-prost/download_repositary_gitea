@@ -1,0 +1,17 @@
+[nitpick.styles]
+include = [
+  "py://nitpick/resources/python/absent"
+]
+
+[nitpick.files.absent]
+".isort.cfg" = "Move values to pyproject.toml, section [tool.isort]"
+".flake8" = "Move values to setup.cfg, section [flake8]"
+"mypy.ini" = "Move values to pyproject.toml, section [tool.mypy]"
+"pytest.ini" = "Move values to pyproject.toml, section [tool.pytest.ini_options]"
+".travis.yml" = "Travis is shutting down, please switch to some other CI service"
+
+
+[nitpick.files.present]
+"CHANGELOG.md" = "A project should have `CHANGELOG.md`"
+"README.md" = "A project should have `README.md`"
+".gitignore" = "A project should have `.gitignore` file"

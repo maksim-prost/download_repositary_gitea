@@ -1,0 +1,13 @@
+[nitpick]
+minimum_version = "0.32.0"
+
+[nitpick.styles]
+include = [
+  "editorconfig.toml",
+  "file-structure.toml",
+  "styleguide.toml",
+  "flake8.toml",
+  "isort.toml",
+  "darglint.toml",
+  "pytest.toml"
+]

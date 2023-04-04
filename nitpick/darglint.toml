@@ -1,0 +1,2 @@
+["setup.cfg".darglint]
+strictness = "long"
