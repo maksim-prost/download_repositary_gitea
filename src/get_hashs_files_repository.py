@@ -1,6 +1,7 @@
 """A generator that fakes a read from a file."""
 import asyncio
 import logging
+from tempfile import TemporaryDirectory
 
 import aiohttp
 
@@ -128,7 +129,9 @@ def get_hash_files(path_to_load, list_load_file):
 
 if __name__ == '__main__':
     url_repository = 'https://gitea.radium.group/radium/project-configuration'
-    path_to_load = 'dir_for_load_file_from_repository'
+    temporary_dir = TemporaryDirectory()
+    path_to_load = temporary_dir.name
     list_load_files = asyncio.run(load_repo(url_repository, path_to_load))
     logging.basicConfig(level=logging.INFO)
     logging.info(get_hash_files(path_to_load, list_load_files))
+    temporary_dir.cleanup()
